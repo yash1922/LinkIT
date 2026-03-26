@@ -1,0 +1,83 @@
+{% extends "mailer/base.html" %}
+{% block content %}
+<h3 class="mb-3">Send Emails</h3>
+<div class="alert alert-info">
+  Use your Gmail with an App Password. If you haven't set it up, read <a href="{% url 'gmail_help' %}">Gmail SMTP Help</a>.
+</div>
+
+<form method="post" class="card card-body">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label class="form-label">SMTP Username (Gmail address)</label>
+        {{ form.smtp_username }}
+        <small class="text-muted d-block">Optional — leave blank to use your logged-in email as the SMTP username.</small>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">From (display)</label>
+        <input class="form-control" value="{{ current_user_email }}" disabled>
+        <input type="hidden" name="current_user_email" value="{{ current_user_email }}">
+        <small class="text-muted">This is the logged-in email (visual only). You can enter a different Gmail above to send from.</small>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Gmail App Password</label>
+        {{ form.app_password }}
+        <small class="text-muted d-block">Paste the 16-character App Password you generated in Google Account → Security → App passwords.</small>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">SMTP Host</label>
+        {{ form.smtp_host }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">SMTP Port</label>
+        {{ form.smtp_port }}
+      </div>
+
+      <div class="mb-3 form-check">
+        {{ form.use_tls }} <label class="form-check-label">Use TLS</label>
+      </div>
+
+      <div class="mb-3 form-check">
+        {{ form.use_ssl }} <label class="form-check-label">Use SSL (port 465)</label>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Timeout (seconds)</label>
+        {{ form.timeout }}
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label class="form-label">Template</label>
+        {{ form.template }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Subject Override (optional)</label>
+        {{ form.subject_override }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Contacts File</label>
+        {{ form.upload }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Tip</label>
+        {{ form.message_variables_help }}
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex gap-2">
+    <button class="btn btn-success" name="send_all" value="1" type="submit">Send to All</button>
+    <button class="btn btn-outline-secondary" name="send_test" value="1" type="submit">Send Test to Me</button>
+  </div>
+</form>
+{% endblock %}

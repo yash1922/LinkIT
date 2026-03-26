@@ -1,0 +1,41 @@
+{% extends "mailer/base.html" %}
+{% block content %}
+<div class="p-4 bg-light rounded">
+	<h2 class="mb-3">LinkIT</h2>
+	<p class="lead">Send personalized bulk emails using your own Gmail account and an Excel/CSV contact list.</p>
+	<hr>
+	<h4 class="mb-2">Prerequisites</h4>
+	<ul>
+		<li>Create an account (Sign up) and login with the Gmail address you want to send from.</li>
+		<li>Enable 2‑Step Verification on your Google account.</li>
+		<li>Create a Gmail App Password for Mail. See <a href="{% url 'gmail_help' %}">Gmail SMTP Help</a>.</li>
+		<li>Prepare your contacts file:
+			<ul>
+				<li>Format: .xlsx or .csv</li>
+				<li>Required column: <code>email</code></li>
+				<li>Optional columns: any placeholders you plan to use (e.g., <code>first_name</code>, <code>company</code>)</li>
+			</ul>
+		</li>
+	</ul>
+	<div class="table-responsive">
+		<table class="table table-sm table-bordered w-auto">
+			<thead><tr><th>email</th><th>first_name</th><th>company</th></tr></thead>
+			<tbody>
+				<tr><td>alice@example.com</td><td>Alice</td><td>Acme Inc</td></tr>
+				<tr><td>bob@example.com</td><td>Bob</td><td>Globex</td></tr>
+			</tbody>
+		</table>
+	</div>
+	<a class="btn btn-outline-secondary btn-sm" href="{% url 'sample_contacts' %}">Download sample CSV</a>
+	<div class="mt-4">
+		{% if request.user.is_authenticated %}
+			<a href="{% url 'setup' %}" class="btn btn-primary btn-lg">Get Started</a>
+		{% else %}
+			<a href="{% url 'signup' %}" class="btn btn-success btn-lg me-2">Sign up</a>
+			<a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
+
+

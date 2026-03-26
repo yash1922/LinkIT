@@ -1,0 +1,26 @@
+{% extends "mailer/base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<h3>Templates</h3>
+	<a href="{% url 'template_create' %}" class="btn btn-primary">New Template</a>
+	</div>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead><tr><th>Name</th><th>Subject</th><th>Updated</th><th></th></tr></thead>
+		<tbody>
+		{% for t in items %}
+			<tr>
+				<td>{{ t.name }}</td>
+				<td>{{ t.subject }}</td>
+				<td>{{ t.updated_at }}</td>
+				<td><a href="{% url 'template_edit' t.id %}" class="btn btn-sm btn-outline-secondary">Edit</a></td>
+			</tr>
+		{% empty %}
+			<tr><td colspan="4">No templates yet.</td></tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}
+
+

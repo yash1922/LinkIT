@@ -1,0 +1,29 @@
+{% extends "mailer/base.html" %}
+{% block content %}
+<div class="card card-body col-md-6 mx-auto">
+    <h3 class="mb-3">Log in</h3>
+
+    {% if form.errors %}
+        <div class="alert alert-danger">Invalid username or password.</div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            {{ form.username }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            {{ form.password }}
+        </div>
+
+        <button class="btn btn-primary w-100" type="submit">Log in</button>
+    </form>
+
+    <hr>
+    <p class="text-center">Don’t have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+</div>
+{% endblock %}

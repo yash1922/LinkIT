@@ -1,0 +1,30 @@
+{% extends "mailer/base.html" %}
+{% block content %}
+<h3 class="mb-3">Enable Gmail SMTP (App Password)</h3>
+<ol>
+	<li>Ensure 2‑Step Verification is enabled on your Google account.</li>
+	<li>Create an App Password:
+		<ul>
+			<li>Go to <a href="https://myaccount.google.com/security" target="_blank" rel="noreferrer">Google Account → Security</a>.</li>
+			<li>Under "Signing in to Google", open "App passwords".</li>
+			<li>Select "Mail" as the app and "Other" (or your device) for the device.</li>
+			<li>Generate and copy the 16‑character App Password.</li>
+		</ul>
+	</li>
+	<li>Use settings below on the Send page:
+		<ul>
+			<li><strong>SMTP Host</strong>: smtp.gmail.com</li>
+			<li><strong>SMTP Port</strong>: 587</li>
+			<li><strong>Use TLS</strong>: checked</li>
+			<li><strong>From</strong>: your Gmail address</li>
+			<li><strong>Password</strong>: the App Password you generated</li>
+		</ul>
+	</li>
+</ol>
+<div class="alert alert-warning">
+	Do not use your normal Gmail password. Always use an App Password. Keep it secret and revoke it anytime from your Google Account.
+	</div>
+<a href="{% url 'send_bulk_emails' %}" class="btn btn-primary">I have enabled it — Continue</a>
+{% endblock %}
+
+

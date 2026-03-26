@@ -1,0 +1,38 @@
+{% extends "mailer/base.html" %}
+{% block content %}
+<div class="p-4 bg-light rounded">
+	<h3 class="mb-3">Welcome</h3>
+	<p>Create templates, upload your contacts Excel/CSV, then send bulk emails using your own Gmail SMTP.</p>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="card mb-3">
+				<div class="card-body">
+					<h5 class="card-title">Templates</h5>
+					<p class="card-text">{{ templates_count }} saved</p>
+					<a href="{% url 'template_list' %}" class="btn btn-primary">Manage</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card mb-3">
+				<div class="card-body">
+					<h5 class="card-title">Contacts</h5>
+					<p class="card-text">{{ uploads_count }} file(s) uploaded</p>
+					<a href="{% url 'upload_contacts' %}" class="btn btn-primary">Upload</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="card mb-3">
+				<div class="card-body">
+					<h5 class="card-title">Send</h5>
+					<p class="card-text">Use your Gmail app password to send.</p>
+					<a href="{% url 'send_bulk_emails' %}" class="btn btn-success">Send Emails</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+
